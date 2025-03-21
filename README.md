@@ -5,6 +5,8 @@
 #AttackPaths
 #Docker 
 
+The purpose of this page is to document the steps needed to setup Sharphound (for the Community Edition) to run as a scheduled task using a gMSA (Group Managed Service Account)
+
 # Resources
 
 [Create a gMSA for use with SharpHound Enterprise](https://support.bloodhoundenterprise.io/hc/en-us/articles/9295298941723-Create-a-gMSA-for-use-with-SharpHound-Enterprise)
