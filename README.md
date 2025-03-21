@@ -19,7 +19,8 @@ Get-KdsRootKey
 
 - If there is no result returned, then the Get-KdsRootKey has not been configured in the domain
 
-![](Pasted%20image%2020250321113728.png)
+![Pasted image 20250321113728](https://github.com/user-attachments/assets/503d5c11-baee-4818-b529-5aef0ab26dc1)
+
 
 - This documentation will be using the OU examples that are documented in the SpecterOps documentation on creating the gMSA account. You will need to modify the parameters to work in your environment.
 	- The **Tier0** OU
