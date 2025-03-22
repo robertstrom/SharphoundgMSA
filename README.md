@@ -3,7 +3,7 @@
 #Sharphound
 #Discovery
 #AttackPaths
-#Docker 
+
 
 The purpose of this page is to document the steps needed to setup Sharphound (for the Community Edition) to run as a scheduled task using a gMSA (Group Managed Service Account)
 
