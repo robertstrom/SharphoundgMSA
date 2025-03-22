@@ -224,7 +224,7 @@ C:\Users\administrator.2022TESTING\Downloads\SharpHound-v2.6.1\SharpHound.exe -c
 
 
 - Running the following command will modify the scheduled task to run as the gMSA account
-	- This solution to assigning the gMSA account to run the scheduled task was found before the complete [PowerShell Scheduled Task creation method]([https://thesleepyadmins.com/2024/02/05/using-group-managed-services-account-with-scheduled-tasks/](https://thesleepyadmins.com/2024/02/05/using-group-managed-services-account-with-scheduled-tasks/)). The `schtasks` command below comes from the [**stackoverflow** post]([https://stackoverflow.com/questions/62699123/deploy-gmsa-account-as-task-scheduler-user-account](https://stackoverflow.com/questions/62699123/deploy-gmsa-account-as-task-scheduler-user-account)) linked in the Resources section of this document
+	- This solution to assigning the gMSA account to run the scheduled task was found before the complete [PowerShell Scheduled Task creation method ](https://thesleepyadmins.com/2024/02/05/using-group-managed-services-account-with-scheduled-tasks/) The `schtasks` command below comes from the [**stackoverflow** post](https://stackoverflow.com/questions/62699123/deploy-gmsa-account-as-task-scheduler-user-account) linked in the Resources section of this document
 
 ```
 schtasks /change /TN \SharpHound /RU 2022TESTING\t0_gMSA_SHS$ /RP
