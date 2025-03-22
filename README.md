@@ -10,7 +10,9 @@ The purpose of this page is to document the steps needed to setup Sharphound (fo
 # Resources
 
 [Create a gMSA for use with SharpHound Enterprise](https://support.bloodhoundenterprise.io/hc/en-us/articles/9295298941723-Create-a-gMSA-for-use-with-SharpHound-Enterprise)
+
 [Using Group Managed Services Account with Scheduled Tasks](https://thesleepyadmins.com/2024/02/05/using-group-managed-services-account-with-scheduled-tasks/)
+
 [Deploy gMSA account as task scheduler user account](https://stackoverflow.com/questions/62699123/deploy-gmsa-account-as-task-scheduler-user-account)
 
 # Create the gMSA account
