@@ -27,7 +27,7 @@ Get-KdsRootKey
 ```
 
 - If there is no result returned, then the KDS Root Key has not been configured in the domain
-- If there is a result returned, the the KDS Root Key has already been configured in the domain, and the step to create the KDS Root Key can be skipped
+- If there is a result returned, the the KDS Root Key has already been configured in the domain, and the step to create the KDS Root Key using the `Add-KdsRootKey` command can be skipped
 
 ![Pasted image 20250321113728](https://github.com/user-attachments/assets/503d5c11-baee-4818-b529-5aef0ab26dc1)
 
