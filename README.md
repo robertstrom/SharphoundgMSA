@@ -179,23 +179,80 @@ Test-ADServiceAccount -Identity $gmsaName
 
 # Creation of the PowerShell script and scheduled task
 
+
 ## Creation of the PowerShell script to be run as a scheduled task
 
 - Now the PowerShell script to run Sharphound via a scheduled task needs to be created
+- Create a directory named Sharphound in the `C:\Support` directory
+- Create a sub-directory named `Results` in the `C:\Support\Sharphound`directory
+- Copy the Sharphound executable to the `C:\Support\Sharphound `directory on the server where the scheduled task will be run (it is recommended that the Sharphound executable be zipped in a password protected zip file so that it does not get prevented by Microsoft Defender during the file transfer)
 - The PowerShell script itself is very simple. The script contains:
-	- The full path to the Shaarphound executable
+	- The full path to the Sharphound executable
 	- The command line arguments that you want to pass to Sharphound
-	- **Optional:** Redirection of the output to a log file (this was very helpful in getting this setup running initially and may be helpful for troubleshooting in the future)
+	- Redirection of the output to a log file (this was very helpful in getting this setup running initially and may be helpful for troubleshooting in the future)
+	- Deletion of files in the `C:\Support\Sharphound\Results` directory that are older than 2 months
+	- The PowerShell script named `Sharphound_Collection.ps1` should be saved to the `C:\Support\Sharphound` directory
+	- The names of the base --zipfilename and the log file should be modified for each specific domain where this is deployed.
 
 ```
-C:\Users\administrator.2022TESTING\Downloads\SharpHound-v2.6.1\SharpHound.exe -c all --outputdirectory C:\Support\SharpHound --zipfilename BloodHound_gmsa.zip > C:\Support\sharphound-gmsa.log
+$FileDateStamp = Get-Date -Format FileDateTime
+C:\Support\SharpHound\SharpHound.exe -c all --outputdirectory C:\Support\SharpHound\Results\ --zipfilename <DomainName>_BloodHound_gmsa.zip *> "C:\Support\SharpHound\Results\$FileDateStamp-<DomainName>_sharphound-gmsa.log"
+
+$Folder = "C:\Support\Sharphound\Results"
+
+#Delete files older than 2 months
+Get-ChildItem $Folder -Recurse -Force -ea 0 |
+? {!$_.PsIsContainer -and $_.LastWriteTime -lt (Get-Date).AddDays(-60)} |
+ForEach-Object {
+   $_ | del -Force
+   $_.FullName | Out-File "C:\Support\Sharphound\$FileDateStamp-deletedlog.txt"
+   }
 ```
 
+- The resulting directory structure should resemble the screenshot shown below
 
-![Pasted image 20250321123046](https://github.com/user-attachments/assets/34784ec7-d839-444c-abb4-b08e31dd6182)
+![image](https://github.com/user-attachments/assets/957b95a2-83fc-4b5b-8299-c5830c27cd64)
+
+- The resulting `SharpHound_Collection.ps1` PowerShell script should resemble the screenshot shown below
+
+![image](https://github.com/user-attachments/assets/d6eab89d-8349-4de8-9cf2-d1067c06a39e)
+
 
 
 ## Creation of the Scheduled Task
+
+- Chose either the PowerShell method or the GUI method to create the scheduled task. There is no need to (you should not) do both methods. The PowerShell method is almost certainly the best / easiest way to create the scheduled task.
+
+### Creating the Scheduled Task via PowerShell
+
+ - Run the PowerShell commands shown below (modifying files names and domain names as necessary)
+
+```
+$arg = "-ExecutionPolicy ByPass -NoProfile -File C:\Support\SharpHound\Sharphound_Collection.ps1"
+$ta = New-ScheduledTaskAction -Execute C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe  -Argument $arg
+$tt = New-ScheduledTaskTrigger -At 9:00 -Weekly -DaysOfWeek Monday
+$ap = New-ScheduledTaskPrincipal -UserID 2022TESTING\t0_gMSA_SHS$ -LogonType Password 
+Register-ScheduledTask SharpHoundCollection –Action $ta –Trigger $tt –Principal $ap
+```
+
+- Construct the PowerShell commands needed for your environment in preparation for executing them in an elevated PowerShell shell
+
+![image](https://github.com/user-attachments/assets/4702f982-3723-4f81-baef-57b86b562780)
+
+- Copy and paste the PowerShell commands into the elevated PowerShell shell to create the scheduled task
+
+![image](https://github.com/user-attachments/assets/61f12d64-6bed-4772-a2b3-0ea5779e5cff)
+
+- The scheduled task has been successfuly created
+
+![image](https://github.com/user-attachments/assets/c08a9104-3a12-4fb9-9ca3-5666bad7c48d)
+
+- After refreshing the Scheduled Tasks MMC you should see the newly created scheduled task that will run as the gMSA account
+
+![image](https://github.com/user-attachments/assets/5f9eb8d1-a7c4-4471-b694-c3e858022204)
+
+
+### Creating the Scheduled Task via the GUI
 
 - Open the Scheduled Tasks MSC on the Sharphound server and create a scheduled task. In the example shown below the scheduled task name is **Sharphound**
 
