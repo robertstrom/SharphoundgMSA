@@ -10,4 +10,5 @@ The documents are numbered for the order of the steps to be followed:
 
 4 - Testing the Sharphound scheduled task running as the gMSA account
 
+![image](https://github.com/user-attachments/assets/cc7f4941-23e0-4382-ad05-b0867c68c0ee)
 
