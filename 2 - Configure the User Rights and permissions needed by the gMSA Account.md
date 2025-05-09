@@ -24,7 +24,7 @@ share: "true"
 - At this time there are two main paths that could be used to give the Sharphound gMSA account the permissions needed to collect the Active Directory information needed  
 	- **Method #1** - Make the Sharphound gMSA account a member of the **Local Administrators** group on all computers in the domain  
 	- **Method #2** - Make the Sharphound gMSA account a member of the **Domain Admins** group  
-- At this time, it is my understanding that using an account that has **Domain Admins** permissions will enable the Sharphound collection to collect all of the possible pertinent information from Active Directory for the best possible analysis by BloodHound. This may change in the future  
+- At this time, it is my understanding that using an account that has **Domain Admins** permissions will enable the Sharphound executable to collect all of the possible pertinent information from Active Directory for the best possible analysis by BloodHound. This may change in the future.  
   
 ## gMSA Account protections  
   
