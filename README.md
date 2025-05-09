@@ -1,6 +1,6 @@
 This repository documents the configuration and implementation of runnging the SpecterOps Sharphound collection tool using an Active Directory gMSA (Group Manged Service Account).
 
-The documents are numbered for the order of the steps to be followed:
+The documents are numbered for the order of the steps to be performed:
 
 1 - Creating the gMSA account
 
