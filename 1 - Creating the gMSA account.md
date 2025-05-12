@@ -131,7 +131,7 @@ New-ADServiceAccount -Name $gmsaName `
   
 ## Validating that the gMSA account is working  
   
-- **NOTE:** The `Test-ADServiceAccount` PowerShell command is dependent on the PowerShell AD RSAT cmdlets be install on the system where the gMSA account will be running Sharphound  
+- **NOTE:** The `Test-ADServiceAccount` PowerShell command is dependent on the PowerShell AD RSAT cmdlets being installed on the system where the gMSA account will be running Sharphound  
 	- SpecterOps notes about this can be found [here](https://bloodhound.specterops.io/install-data-collector/install-sharphound/create-gmsa#test-the-gmsa-optional)  
 - Test the gMSA server to make sure that the gMSA is working (this must be performed on the gMSA server)  
 	- Modifications will be needed to make it relevant for your environment  
